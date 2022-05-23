@@ -7,8 +7,8 @@ import (
 
 func (s *Storage) TestFindByAuthor(t *testing.T) {
 	v, _ := s.FindByAuthor(&api.Request{Search: "Пушкин"})
-	if v.Books[0].Name != "Евгений Онегин" {
-		t.Error("Expected Евгений Онегин, got ", v.Books[0].Name)
+	if v.Books[0].Name != "Евгений Онегин" && v.Books[1].Name != "Метель" {
+		t.Error("Expected Евгений Онегин, Метель, got ", v.Books[0].Name, v.Books[1].Name)
 	}
 }
 
