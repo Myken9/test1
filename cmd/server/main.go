@@ -17,7 +17,7 @@ import (
 
 func main() {
 
-	db, err := sql.Open("mysql", "root:123456@tcp(8080:8080)/booksdb?multiStatements=true")
+	db, err := sql.Open("mysql", "root:123456@tcp(8000:8000)/booksdb?multiStatements=true")
 	if err != nil {
 		panic(err)
 	}

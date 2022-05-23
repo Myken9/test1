@@ -16,7 +16,7 @@ func NewStorage(conn *sql.DB) *Storage {
 
 func (s *Storage) FindByAuthor(req *api.Request) (api.Books, error) {
 	answer := []*api.Book{}
-	rows, err := s.db.Query("SELECT title FROM author INNER JOIN book ON author.author_id = book.author_id WHERE name_author = ?;", req.Search)
+	rows, err := s.db.Query("SELECT title FROM author INNER JOIN book INNER JOIN books_authors ON author.author_id = book.author_id WHERE name_author = ?;", req.Search)
 	if err != nil {
 		fmt.Println(err)
 		return api.Books{}, err
@@ -36,7 +36,7 @@ func (s *Storage) FindByAuthor(req *api.Request) (api.Books, error) {
 
 func (s *Storage) FindByTitle(req *api.Request) (api.Authors, error) {
 	answer := []*api.Author{}
-	rows, err := s.db.Query("SELECT author FROM author INNER JOIN book ON author.author_id = book.author_id WHERE title = ?;", req.Search)
+	rows, err := s.db.Query("SELECT author FROM author INNER JOIN book INNER JOIN books_authors ON author.author_id = book.author_id WHERE title = ?;", req.Search)
 	if err != nil {
 		fmt.Println(err)
 		return api.Authors{}, err
