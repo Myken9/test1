@@ -15,3 +15,28 @@ CREATE TABLE books_authors(
                               FOREIGN KEY (book_id)  REFERENCES book (id),
                               primary key (book_id, author_id)
 );
+
+INSERT INTO book (title)
+VALUES ('Евгений Онегин');
+
+INSERT INTO author (name)
+VALUES ('Пушкин');
+
+INSERT INTO books_authors (book_id, author_id)
+VALUES (1,1);
+
+INSERT INTO book (title)
+VALUES ('Метель');
+
+INSERT INTO book (title)
+VALUES ('Пометель');
+
+
+INSERT INTO author (name)
+VALUES ('Пупкин');
+
+INSERT INTO books_authors (book_id, author_id)
+VALUES (2,1);
+
+INSERT INTO books_authors (book_id, author_id)
+VALUES (3,2);
