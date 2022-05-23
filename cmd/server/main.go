@@ -2,10 +2,11 @@ package main
 
 import (
 	"database/sql"
-	"github.com/go-sql-driver/mysql"
+
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/golang-migrate/migrate/v4"
-	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/mattes/migrate"
+	"github.com/mattes/migrate/database/mysql"
+	_ "github.com/mattes/migrate/source/file"
 	"google.golang.org/grpc"
 	"log"
 	"net"
