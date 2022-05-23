@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api;
+
+service Library {
+  rpc FindBooks(Request) returns (Books);
+  rpc FindAuthors(Request) returns (Authors);
+}
+
+message Request {
+  string search = 1;
+}
+
+message Book {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Author {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Books {
+  repeated Book books = 1;
+}
+
+message Authors {
+  repeated Author authors = 1;
+}
