@@ -5,7 +5,7 @@ services:
     image: percona/percona-server:latest
     container_name: myken9_db
     ports:
-      - "3306"
+      - "3307:3306"
     environment:
       - MYSQL_DATABASE=db
       - MYSQL_USER=user

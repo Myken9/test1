@@ -10,7 +10,7 @@ import (
 	"net"
 	"os"
 	"test1/pkg/api"
-	"test1/pkg/finder"
+	"test1/pkg/server"
 	"test1/pkg/storage"
 )
 
@@ -29,10 +29,10 @@ func main() {
 	defer db.Close()
 
 	s := grpc.NewServer()
-	srv := &finder.GRPCServer{St: storage.NewStorage(db)}
+	srv := &server.GRPCServer{St: storage.NewStorage(db)}
 	api.RegisterLibraryServer(s, srv)
 
-	l, err := net.Listen("tcp", ":8080")
+	l, err := net.Listen("tcp", os.Getenv("LISTENED_ADDR"))
 	if err != nil {
 		log.Fatal(err)
 	}
