@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/mattes/migrate v3.0.1+incompatible // indirect
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
 	golang.org/x/sys v0.0.0-20220317061510-51cd9980dadf // indirect
 	golang.org/x/text v0.3.7 // indirect

@@ -3,6 +3,9 @@ package main
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/mattes/migrate"
+	"github.com/mattes/migrate/database/mysql"
+	_ "github.com/mattes/migrate/source/file"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -16,6 +19,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	driver, _ := mysql.WithInstance(db, &mysql.Config{})
+	m, _ := migrate.NewWithDatabaseInstance(
+		"test1/pkg/schema",
+		"mysql",
+		driver,
+	)
+
+	m.Steps(2)
 
 	defer db.Close()
 
