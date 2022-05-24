@@ -16,6 +16,12 @@ CREATE TABLE books_authors(
                               primary key (book_id, author_id)
 );
 
+
+
+
+
+
+
 INSERT INTO book (title)
 VALUES ('Евгений Онегин');
 
