@@ -55,7 +55,7 @@ func (s *Storage) FindByTitle(bookTitle string) ([]Author, error) {
 	defer rows.Close()
 	for rows.Next() {
 		author := Author{}
-		err := rows.Scan(&author.Name)
+		err := rows.Scan(&author.ID, &author.Name)
 		if err != nil {
 			fmt.Println(err)
 			return authors, err

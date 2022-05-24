@@ -34,7 +34,6 @@ VALUES ('Метель');
 INSERT INTO book (title)
 VALUES ('Пометель');
 
-
 INSERT INTO author (name)
 VALUES ('Пупкин');
 

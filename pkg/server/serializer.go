@@ -6,27 +6,23 @@ import (
 )
 
 func booksToApi(books []storage.Book) *api.Books {
-	apiBooks := make([]*api.Book, len(books))
+	resp := &api.Books{Books: nil}
 	for i := range books {
-		apiBooks = append(apiBooks, &api.Book{
+		resp.Books = append(resp.Books, &api.Book{
 			Id:   books[i].ID,
 			Name: books[i].Title,
 		})
 	}
-	return &api.Books{
-		Books: apiBooks,
-	}
+	return resp
 }
 
 func authorsToApi(authors []storage.Author) *api.Authors {
-	apiAuthors := make([]*api.Author, len(authors))
+	resp := &api.Authors{Authors: nil}
 	for i := range authors {
-		apiAuthors = append(apiAuthors, &api.Author{
+		resp.Authors = append(resp.Authors, &api.Author{
 			Id:   authors[i].ID,
 			Name: authors[i].Name,
 		})
 	}
-	return &api.Authors{
-		Authors: apiAuthors,
-	}
+	return resp
 }
