@@ -3,31 +3,28 @@ package main
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/mattes/migrate"
-	"github.com/mattes/migrate/database/mysql"
+	"github.com/joho/godotenv"
 	_ "github.com/mattes/migrate/source/file"
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"os"
 	"test1/pkg/api"
 	"test1/pkg/finder"
 	"test1/pkg/storage"
 )
 
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Print("No .env file found")
+	}
+}
+
 func main() {
-	db, err := sql.Open("mysql", "root:123456@/booksdb")
+	db, err := sql.Open("mysql", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		panic(err)
 	}
-
-	driver, _ := mysql.WithInstance(db, &mysql.Config{})
-	m, _ := migrate.NewWithDatabaseInstance(
-		"test1/pkg/schema",
-		"mysql",
-		driver,
-	)
-
-	m.Steps(2)
 
 	defer db.Close()
 
