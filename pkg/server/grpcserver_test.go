@@ -14,20 +14,36 @@ import (
 func TestGRPCServer_FindAuthors(t *testing.T) {
 	s, deferFunc := initServer()
 	defer deferFunc()
-	resp, err := s.FindAuthors(context.Background(), &api.Request{Search: "Метель"})
-	assert.Nil(t, err)
-	assert.Len(t, resp.Authors, 1)
-	assert.Equal(t, "Пушкин", resp.Authors[0].Name)
+
+	t.Run("Find successful", func(t *testing.T) {
+		resp, err := s.FindAuthors(context.Background(), &api.Request{Search: "Метель"})
+		assert.Nil(t, err)
+		assert.Len(t, resp.Authors, 1)
+		assert.Equal(t, "Пушкин", resp.Authors[0].Name)
+	})
+
+	t.Run("No results", func(t *testing.T) {
+		resp, err := s.FindAuthors(context.Background(), &api.Request{Search: "белиберда"})
+		assert.Nil(t, err)
+		assert.Len(t, resp.Authors, 0)
+	})
 }
 
 func TestGRPCServer_FindBooks(t *testing.T) {
 	s, deferFunc := initServer()
 	defer deferFunc()
-	resp, err := s.FindBooks(context.Background(), &api.Request{Search: "Пушкин"})
-	assert.Nil(t, err)
-	assert.Len(t, resp.Books, 2)
-	assert.Equal(t, "Евгений Онегин", resp.Books[0].Name)
-	assert.Equal(t, "Метель", resp.Books[1].Name)
+	t.Run("Find successful", func(t *testing.T) {
+		resp, err := s.FindBooks(context.Background(), &api.Request{Search: "Пушкин"})
+		assert.Nil(t, err)
+		assert.Len(t, resp.Books, 2)
+		assert.Equal(t, "Евгений Онегин", resp.Books[0].Name)
+		assert.Equal(t, "Метель", resp.Books[1].Name)
+	})
+	t.Run("No results", func(t *testing.T) {
+		resp, err := s.FindBooks(context.Background(), &api.Request{Search: "Белиберда"})
+		assert.Nil(t, err)
+		assert.Len(t, resp.Books, 0)
+	})
 }
 
 func initServer() (*GRPCServer, func()) {
